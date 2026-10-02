@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نظام مواعيد العمل</title>
+  <meta name="theme-color" content="#2563eb">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="مواعيد العمل">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="CSS/style.css">
+  <link rel="stylesheet" href="CSS/all.css">
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <h1>نظام مواعيد العمل</h1>
+      <p>نظام: يوم عمل واحد + 3 أيام إجازة</p>
+    </header>
+
+    <section class="card settings">
+      <h2>إعدادات الدورة</h2>
+      <p class="hint">أدخل أول يوم عمل معروف لتحديد دورة العامل. المثال الافتراضي: 28 سبتمبر 2026.</p>
+
+      <div class="form-grid">
+        <label>
+          أول يوم عمل
+          <input type="date" id="referenceDate" value="2026-09-28">
+        </label>
+
+        <label>
+          تاريخ اليوم
+          <input type="date" id="todayDate">
+        </label>
+
+        <button id="checkBtn">فحص حالة اليوم</button>
+      </div>
+    </section>
+
+    <section id="todayResult" class="card result hidden">
+      <h2>حالة العامل اليوم</h2>
+      <div id="statusBox"></div>
+
+      <div class="info-grid">
+        <div>
+          <span>التاريخ</span>
+          <strong id="selectedDate"></strong>
+        </div>
+        <div>
+          <span>موعد العمل القادم</span>
+          <strong id="nextWork"></strong>
+        </div>
+        <div>
+          <span>العمل التالي بعده</span>
+          <strong id="followingWork"></strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>أيام العمل خلال الشهر</h2>
+
+      <div class="form-grid">
+        <label>
+          اختر الشهر
+          <input type="month" id="monthPicker">
+        </label>
+
+        <button id="monthBtn">عرض أيام العمل</button>
+      </div>
+
+      <div id="monthSummary" class="month-summary hidden"></div>
+      <div id="workDays" class="work-days"></div>
+    </section>
+
+    <footer>
+      <p>يمكن تغيير تاريخ بداية الدورة من إعدادات الصفحة.</p>
+    </footer>
+  </main>
+
+  <script src="js/script.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js").catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
